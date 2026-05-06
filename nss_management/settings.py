@@ -93,16 +93,16 @@ DATABASES = {
 }
 
 # Add SSL requirement for TiDB Cloud
-if 'tidbcloud' in DATABASES['default'].get('HOST', ''):
-    # On Windows, mysqlclient works better with ssl_mode='REQUIRED'
-    # On Render (Linux), we use the certifi CA path
+if 'tidbcloud' in DATABASES['default'].get('HOST', '').lower():
     DATABASES['default']['OPTIONS'] = {
         'ssl': {
             'ca': certifi.where(),
-        }
+        },
+        # For PyMySQL, we sometimes need to explicitly set the SSL mode
+        'ssl_mode': 'REQUIRED',
     }
-    # For TiDB Cloud specifically, ensuring the mode is REQUIRED
-    DATABASES['default']['OPTIONS']['ssl_mode'] = 'REQUIRED'
+    # Ensure it uses the right charset for TiDB
+    DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
 
 
 # Password validation
