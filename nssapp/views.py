@@ -123,13 +123,13 @@ def volunteer_dashboard(request):
     })
 
 @login_required_custom
-@role_required_custom(allowed_roles=['volunteer'])
+@role_required_custom(allowed_roles=['volunteer', 'nssleader'])
 def volunteer_profile(request):
     user = UserTab.objects.get(id=request.session['user_id'])
     return render(request, 'volunteer_profile.html', {'user': user})
 
 @login_required_custom
-@role_required_custom(allowed_roles=['volunteer'])
+@role_required_custom(allowed_roles=['volunteer', 'nssleader'])
 def edit_profile(request):
     user = UserTab.objects.get(id=request.session['user_id'])
     if request.method == 'POST':
@@ -141,11 +141,16 @@ def edit_profile(request):
         user.year = request.POST.get('year')
         user.save()
         messages.success(request, "Profile updated successfully!")
-        return redirect('volunteer_dashboard')
+        
+        if user.role == 'volunteer':
+            return redirect('volunteer_dashboard')
+        else:
+            return redirect('leader_dashboard')
+            
     return render(request, 'edit_profile.html', {'user': user})
 
 @login_required_custom
-@role_required_custom(allowed_roles=['volunteer'])
+@role_required_custom(allowed_roles=['volunteer', 'nssleader'])
 def change_password(request):
     if request.method == 'POST':
         old_password = request.POST.get('old_password')
@@ -165,7 +170,10 @@ def change_password(request):
         user.password = new_password
         user.save()
         messages.success(request, "Password changed successfully!")
-        return redirect('volunteer_dashboard')
+        if user.role == 'volunteer':
+            return redirect('volunteer_dashboard')
+        else:
+            return redirect('leader_dashboard')
         
     return render(request, 'change_password.html')
 

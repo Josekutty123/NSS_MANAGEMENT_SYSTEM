@@ -15,7 +15,7 @@
                 <i class="fas fa-user"></i>
             </div>
             <h4 class="fw-bold mb-1">{{ user.name }}</h4>
-            <p class="text-muted small mb-3">NSS Volunteer</p>
+            <p class="text-muted small mb-3">NSS {{ user.role|capfirst }}</p>
             <span class="badge {% if user.status == 'approved' %}bg-success{% else %}bg-warning text-dark{% endif %} px-4 py-2 rounded-pill">
                 {{ user.status|capfirst }} Account
             </span>
@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-8">
         <div class="table-card p-4 animate__animated animate__fadeInRight">
-            <h5 class="fw-bold mb-4 border-bottom pb-2">Volunteer Information</h5>
+            <h5 class="fw-bold mb-4 border-bottom pb-2">Profile Information</h5>
             <div class="row g-4">
                 <div class="col-sm-6">
                     <p class="text-muted small text-uppercase fw-bold mb-1">Registration ID</p>

@@ -53,6 +53,9 @@
                             <a href="{% url 'leader_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'leader_dashboard' %}active{% endif %}">
                                 <i class="fas fa-chart-line"></i> Dashboard
                             </a>
+                            <a href="{% url 'volunteer_profile' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_profile' %}active{% endif %}">
+                                <i class="fas fa-user"></i> My Profile
+                            </a>
                             <a href="{% url 'pending_volunteers' %}" class="sidebar-link {% if request.resolver_match.url_name == 'pending_volunteers' %}active{% endif %}">
                                 <i class="fas fa-user-clock"></i> Pending Approval
                             </a>
