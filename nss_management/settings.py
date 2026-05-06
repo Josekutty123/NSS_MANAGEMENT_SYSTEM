@@ -20,6 +20,7 @@ load_dotenv()
 
 # Use PyMySQL as the MySQL driver
 import pymysql
+pymysql.version_info = (2, 2, 8, "final", 0) # Trick Django into thinking we have a newer mysqlclient
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -98,11 +99,9 @@ if 'tidbcloud' in DATABASES['default'].get('HOST', '').lower():
         'ssl': {
             'ca': certifi.where(),
         },
-        # For PyMySQL, we sometimes need to explicitly set the SSL mode
-        'ssl_mode': 'REQUIRED',
+        # Ensure it uses the right charset for TiDB
+        'charset': 'utf8mb4',
     }
-    # Ensure it uses the right charset for TiDB
-    DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
 
 
 # Password validation
