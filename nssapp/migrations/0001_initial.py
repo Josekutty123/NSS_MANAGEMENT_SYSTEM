@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'user_tab',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(

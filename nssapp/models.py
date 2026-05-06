@@ -15,7 +15,7 @@ class UserTab(models.Model):
     status = models.CharField(max_length=50) # pending, approved
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_tab'
 
 
