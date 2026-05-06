@@ -87,6 +87,14 @@ DATABASES = {
     )
 }
 
+# Add SSL requirement for TiDB Cloud if in production
+if not DEBUG and 'tidbcloud' in DATABASES['default'].get('HOST', ''):
+    DATABASES['default']['OPTIONS'] = {
+        'ssl': {
+            'ca': '/etc/ssl/certs/ca-certificates.crt', # Standard path on Render/Linux
+        }
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
