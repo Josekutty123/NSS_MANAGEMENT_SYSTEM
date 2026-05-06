@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NSS Management{% endblock %} | Amal Jyothi</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            {% if request.session.user_id %}
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block d-none px-0 shadow-sm">
+                <div class="position-sticky">
+                    <div class="px-4 mb-4 mt-4">
+                        <p class="text-uppercase small fw-bold text-muted mb-0">Access Level</p>
+                        <span class="badge bg-primary rounded-pill">{{ request.session.user_role|capfirst }}</span>
+                    </div>
+
+                    <div class="sidebar-menu">
+                        {% if request.session.user_role == 'admin' %}
+                            <a href="{% url 'admin_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                                <i class="fas fa-th-large"></i> Dashboard
+                            </a>
+                            <a href="{% url 'volunteer_list' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_list' %}active{% endif %}">
+                                <i class="fas fa-users"></i> Volunteers
+                            </a>
+                            <a href="{% url 'nssleader_list' %}" class="sidebar-link {% if request.resolver_match.url_name == 'nssleader_list' %}active{% endif %}">
+                                <i class="fas fa-user-tie"></i> NSS Leaders
+                            </a>
+                            <a href="{% url 'admin_send_notification' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_send_notification' %}active{% endif %}">
+                                <i class="fas fa-paper-plane"></i> Send Notification
+                            </a>
+                        {% elif request.session.user_role == 'nssleader' %}
+                            <a href="{% url 'leader_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'leader_dashboard' %}active{% endif %}">
+                                <i class="fas fa-chart-line"></i> Dashboard
+                            </a>
+                            <a href="{% url 'pending_volunteers' %}" class="sidebar-link {% if request.resolver_match.url_name == 'pending_volunteers' %}active{% endif %}">
+                                <i class="fas fa-user-clock"></i> Pending Approval
+                            </a>
+                            <a href="{% url 'approved_volunteers' %}" class="sidebar-link {% if request.resolver_match.url_name == 'approved_volunteers' %}active{% endif %}">
+                                <i class="fas fa-user-check"></i> Approved List
+                            </a>
+                            <a href="{% url 'schedule_event' %}" class="sidebar-link {% if request.resolver_match.url_name == 'schedule_event' %}active{% endif %}">
+                                <i class="fas fa-calendar-plus"></i> Schedule Event
+                            </a>
+                            <a href="{% url 'leader_send_notification' %}" class="sidebar-link {% if request.resolver_match.url_name == 'leader_send_notification' %}active{% endif %}">
+                                <i class="fas fa-paper-plane"></i> Send Notification
+                            </a>
+                            <a href="{% url 'leader_notifications' %}" class="sidebar-link {% if request.resolver_match.url_name == 'leader_notifications' %}active{% endif %}">
+                                <i class="fas fa-bell"></i> Notifications
+                            </a>
+                        {% elif request.session.user_role == 'volunteer' %}
+                            <a href="{% url 'volunteer_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_dashboard' %}active{% endif %}">
+                                <i class="fas fa-home"></i> Dashboard
+                            </a>
+                            <a href="{% url 'volunteer_profile' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_profile' %}active{% endif %}">
+                                <i class="fas fa-user"></i> My Profile
+                            </a>
+                            <a href="{% url 'volunteer_events' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_events' %}active{% endif %}">
+                                <i class="fas fa-calendar-alt"></i> Events
+                            </a>
+                            <a href="{% url 'volunteer_notifications' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_notifications' %}active{% endif %}">
+                                <i class="fas fa-bell"></i> Notifications
+                            </a>
+                            <a href="{% url 'volunteer_pledge' %}" class="sidebar-link {% if request.resolver_match.url_name == 'volunteer_pledge' %}active{% endif %}">
+                                <i class="fas fa-shield-alt"></i> Drug Free Pledge
+                            </a>
+                        {% endif %}
+                        
+                        <div class="border-top my-2 mx-3"></div>
+                        <a href="{% url 'bloodbank_list' %}" class="sidebar-link {% if request.resolver_match.url_name == 'bloodbank_list' %}active{% endif %}">
+                            <i class="fas fa-tint text-danger"></i> Blood Bank List
+                        </a>
+                        <a href="{% url 'logout' %}" class="sidebar-link">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            {% endif %}
+
+            <!-- Main Content -->
+            <main class="{% if request.session.user_id %}col-md-9 ms-sm-auto col-lg-10{% else %}col-12{% endif %} px-md-4 py-4" style="background-color: var(--bg-light-gray); min-height: 100vh;">
+                {% if request.session.user_id %}
+                <!-- Dashboard Header Bar -->
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <h4 class="mb-0 fw-bold text-primary">Dashboard</h4>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3 text-end d-none d-md-block">
+                            <span class="text-muted small"><i class="fas fa-user-circle me-1"></i> {{ request.session.user_name }} ({{ request.session.user_role|capfirst }})</span>
+                        </div>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm shadow-sm">
+                            <i class="fas fa-sign-out-alt me-1"></i> Logout
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="container-fluid py-2">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-1 fw-bold">© 2026 Amal Jyothi College NSS Management System</p>
+            <p class="small text-muted mb-0">Amal Jyothi College of Engineering, Kanjirappally</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Volunteer Profile - Leader View{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <a href="{% url 'approved_volunteers' %}" class="text-decoration-none small fw-bold"><i class="fas fa-arrow-left me-1"></i> Back to List</a>
+    <h2 class="fw-bold mt-2">Volunteer Profile Details</h2>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="table-card p-4 text-center animate__animated animate__fadeInLeft">
+            <div class="stats-icon bg-light text-primary mx-auto mb-3 border" style="width: 120px; height: 120px; font-size: 4rem;">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h4 class="fw-bold mb-1">{{ v.name }}</h4>
+            <p class="text-muted small mb-3">{{ v.regno }}</p>
+            <span class="badge bg-success px-4 py-2 rounded-pill">
+                <i class="fas fa-check-circle me-1"></i> Approved Member
+            </span>
+        </div>
+
+    </div>
+    
+    <div class="col-md-8">
+        <div class="table-card p-4 animate__animated animate__fadeInRight">
+            <h5 class="fw-bold mb-4 border-bottom pb-2">Complete Information</h5>
+            <div class="row g-4">
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Full Name</p>
+                    <p class="fw-bold">{{ v.name }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Registration ID</p>
+                    <p class="fw-bold text-primary">{{ v.regno }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Department</p>
+                    <p class="fw-bold">{{ v.department }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Year of Study</p>
+                    <p class="fw-bold">{{ v.year }}st Year</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Email Address</p>
+                    <p class="fw-bold"><a href="mailto:{{ v.email }}" class="text-decoration-none">{{ v.email }}</a></p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Contact Number</p>
+                    <p class="fw-bold"><a href="tel:{{ v.phone }}" class="text-decoration-none">{{ v.phone }}</a></p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Joining Date</p>
+                    <p class="fw-bold">{{ v.join_date }}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Residential Address</p>
+                    <p class="fw-bold">{{ v.address }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

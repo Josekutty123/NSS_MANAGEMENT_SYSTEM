@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Blood Bank{% endblock %}
+
+{% block content %}
+<div class="mb-4 d-flex justify-content-between align-items-center animate__animated animate__fadeIn">
+    <div>
+        <h2 class="fw-bold"><i class="fas fa-tint text-danger me-2"></i>Blood Bank Donors</h2>
+        <p class="text-muted">Public list of registered blood donors from our college</p>
+    </div>
+    {% if not request.session.user_id %}
+        <a href="{% url 'login' %}" class="btn btn-outline-primary rounded-pill px-4">
+            Login to Join
+        </a>
+    {% endif %}
+</div>
+
+<!-- Search Box -->
+<div class="table-card p-4 mb-4 animate__animated animate__fadeInUp">
+    <form method="GET" action="{% url 'bloodbank_list' %}" class="row g-3">
+        <div class="col-md-10">
+            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
+                <input type="text" name="q" class="form-control border-start-0 bg-light" placeholder="Search by Name, Blood Group, or Reg No..." value="{{ query|default:'' }}">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+</div>
+
+<!-- Donor Table -->
+<div class="table-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">RegNo</th>
+                    <th>Name</th>
+                    <th class="text-center">Age</th>
+                    <th class="text-center">Blood Group</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">{{ donor.regno }}</td>
+                    <td>{{ donor.name }}</td>
+                    <td class="text-center">{{ donor.age }}</td>
+                    <td class="text-center">
+                        <span class="badge bg-danger rounded-pill px-3">{{ donor.blood_group }}</span>
+                    </td>
+                    <td><i class="fas fa-phone-alt me-2 text-muted"></i>{{ donor.phone }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <i class="fas fa-heart-broken fa-3x mb-3 d-block opacity-25"></i>
+                        No donors found matching your search.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

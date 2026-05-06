@@ -1,0 +1,208 @@
+/* 
+   SIMPLE CLEAN WHITE THEME 
+   Professional College Portal Design
+*/
+
+:root {
+    --primary-blue: #0d6efd;
+    --bg-white: #ffffff;
+    --bg-light-gray: #f8f9fa;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+}
+
+/* Sidebar */
+#sidebar {
+    background: var(--bg-white);
+    border-right: 1px solid var(--border-color);
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+    background: var(--bg-light-gray);
+    color: var(--primary-blue);
+    border-left-color: var(--primary-blue);
+}
+
+.sidebar-link i {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #e9f2ff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-heading {
+    color: var(--primary-blue);
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+.hero-subheading {
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+/* Motto Card */
+.motto-card {
+    background: var(--bg-white);
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.motto-card h4 {
+    color: var(--primary-blue);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-sm);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+/* Dashboard Stats Cards */
+.stats-card {
+    background: var(--bg-white);
+    border: none;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+}
+
+.stats-card:hover {
+    box-shadow: var(--shadow);
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Forms */
+.form-card {
+    background: var(--bg-white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 40px;
+}
+
+.form-control {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary-blue);
+}
+
+/* Tables */
+.table-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.table thead {
+    background-color: var(--bg-light-gray);
+}
+
+.table thead th {
+    font-weight: 600;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-light-gray);
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+/* Custom Buttons */
+.btn {
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.btn-outline-primary {
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-blue);
+    color: white;
+}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Approved Volunteers{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">Approved Volunteers</h2>
+    <p class="text-muted">List of verified volunteers in your unit</p>
+</div>
+
+<div class="table-card animate__animated animate__fadeInUp">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">Reg. No</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    <th>Email</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in volunteers %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">{{ v.regno }}</td>
+                    <td>{{ v.name }}</td>
+                    <td><span class="badge bg-light text-dark border">{{ v.department }}</span></td>
+                    <td>{{ v.year }}</td>
+                    <td>{{ v.email }}</td>
+                    <td class="text-center">
+                        <span class="badge bg-success px-3 rounded-pill">Approved</span>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'leader_view_volunteer_profile' v.id %}" class="btn btn-sm btn-primary">View Profile</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center py-5 text-muted">
+                        <i class="fas fa-user-slash fa-3x mb-3 d-block opacity-25"></i>
+                        No approved volunteers found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

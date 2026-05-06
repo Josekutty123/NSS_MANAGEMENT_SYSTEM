@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section mb-5 animate__animated animate__fadeIn">
+    <div class="container">
+        <h1 class="hero-heading mb-2">Amal Jyothi College NSS</h1>
+        <h3 class="hero-subheading mb-4">NSS Management System</h3>
+        
+        <div class="motto-card animate__animated animate__zoomIn">
+            <p class="text-muted small text-uppercase fw-bold mb-1">Our Motto</p>
+            <h4>"NOT ME BUT YOU"</h4>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg shadow-sm">Login to Portal</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg shadow-sm">Volunteer Register</a>
+            <a href="{% url 'bloodbank_list' %}" class="btn btn-danger btn-lg shadow-sm">Blood Bank</a>
+        </div>
+    </div>
+</div>
+
+<!-- Feature Section -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-4 animate__animated animate__fadeInUp">
+            <div class="feature-card text-center">
+                <i class="fas fa-users-cog"></i>
+                <h4 class="fw-bold">Volunteer Management</h4>
+                <p class="text-muted">Efficiently manage volunteer records, participation, and department-wise statistics.</p>
+            </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+            <div class="feature-card text-center">
+                <i class="fas fa-user-check"></i>
+                <h4 class="fw-bold">NSS Leader Approval</h4>
+                <p class="text-muted">Streamlined approval workflow for NSS Leaders to authorize new volunteer registrations.</p>
+            </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+            <div class="feature-card text-center">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4 class="fw-bold">Blood Bank Donor List</h4>
+                <p class="text-muted">A public repository of dedicated blood donors within the college community.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

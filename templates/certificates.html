@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}My Certificates{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn d-flex justify-content-between align-items-center">
+    <div>
+        <h2 class="fw-bold">My NSS Certificates</h2>
+        <p class="text-muted">Digital verification of your service and contributions</p>
+    </div>
+    {% if request.session.user_role == 'nssleader' %}
+        <a href="{% url 'leader_dashboard' %}" class="btn btn-outline-secondary rounded-pill">
+            <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+        </a>
+    {% else %}
+        <a href="{% url 'volunteer_dashboard' %}" class="btn btn-outline-secondary rounded-pill">
+            <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+        </a>
+    {% endif %}
+</div>
+
+<div class="table-card animate__animated animate__fadeInUp">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">No.</th>
+                    <th>Certificate Name</th>
+                    <th class="text-center">Issued Date</th>
+                    <th class="text-center">Code</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cert in certificates %}
+                <tr>
+                    <td class="ps-4">{{ forloop.counter }}</td>
+                    <td class="fw-bold">Drug Free Pledge</td>
+                    <td class="text-center">{{ cert.pledge_date }}</td>
+                    <td class="text-center"><span class="badge bg-light text-primary border border-primary">{{ cert.certificate_code }}</span></td>
+                    <td class="text-center">
+                        <a href="{% url 'view_certificate' cert.id %}" class="btn btn-primary btn-sm rounded-pill px-4 shadow-sm">
+                            <i class="fas fa-download me-1"></i> View & Download
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        <i class="fas fa-medal fa-3x mb-3 d-block opacity-25"></i>
+                        No certificates available yet. Your participation in events will earn you certificates.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

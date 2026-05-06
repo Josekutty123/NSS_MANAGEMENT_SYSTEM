@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">My Profile</h2>
+    <p class="text-muted">Personal details and membership status</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="table-card p-4 text-center animate__animated animate__fadeInLeft">
+            <div class="stats-icon bg-primary text-white mx-auto mb-3" style="width: 100px; height: 100px; font-size: 3rem;">
+                <i class="fas fa-user"></i>
+            </div>
+            <h4 class="fw-bold mb-1">{{ user.name }}</h4>
+            <p class="text-muted small mb-3">NSS Volunteer</p>
+            <span class="badge {% if user.status == 'approved' %}bg-success{% else %}bg-warning text-dark{% endif %} px-4 py-2 rounded-pill">
+                {{ user.status|capfirst }} Account
+            </span>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="table-card p-4 animate__animated animate__fadeInRight">
+            <h5 class="fw-bold mb-4 border-bottom pb-2">Volunteer Information</h5>
+            <div class="row g-4">
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Registration ID</p>
+                    <p class="fw-bold text-primary">{{ user.regno }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Department</p>
+                    <p class="fw-bold">{{ user.department }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Year of Study</p>
+                    <p class="fw-bold">{{ user.year }}st Year</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Joining Date</p>
+                    <p class="fw-bold">{{ user.join_date }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Email Address</p>
+                    <p class="fw-bold">{{ user.email }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Contact Number</p>
+                    <p class="fw-bold">{{ user.phone }}</p>
+                </div>
+                <div class="col-sm-12">
+                    <p class="text-muted small text-uppercase fw-bold mb-1">Residential Address</p>
+                    <p class="fw-bold">{{ user.address }}</p>
+                </div>
+            </div>
+            
+            <div class="mt-5 border-top pt-4">
+                <a href="{% url 'edit_profile' %}" class="btn btn-primary px-4 me-2"><i class="fas fa-edit me-2"></i>Edit Profile</a>
+                <a href="{% url 'change_password' %}" class="btn btn-outline-secondary px-4">Change Password</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

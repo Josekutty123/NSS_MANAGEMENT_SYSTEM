@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Upcoming Events{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">Upcoming Events</h2>
+    <p class="text-muted">Stay updated with the latest NSS activities</p>
+</div>
+
+<div class="row g-4">
+    {% for event in events %}
+    <div class="col-md-6 col-lg-4">
+        <div class="table-card p-4 h-100 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge bg-primary rounded-pill px-3">{{ event.event_date }}</span>
+                <span class="text-muted small"><i class="fas fa-clock me-1"></i> {{ event.event_time }}</span>
+            </div>
+            <h5 class="fw-bold mb-2">{{ event.title }}</h5>
+            <p class="text-muted small mb-3 flex-grow-1">{{ event.description }}</p>
+            <div class="border-top pt-3 mt-auto">
+                <div class="d-flex align-items-center text-muted small">
+                    <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                    <span>{{ event.place }}</span>
+                </div>
+                <div class="d-flex align-items-center text-muted small mt-2">
+                    <i class="fas fa-calendar-day text-primary me-2"></i>
+                    <span>{{ event.event_day }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="table-card p-5 text-center">
+            <i class="fas fa-calendar-times fa-4x text-muted mb-3 opacity-25"></i>
+            <h5 class="text-muted">No upcoming events scheduled at the moment.</h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

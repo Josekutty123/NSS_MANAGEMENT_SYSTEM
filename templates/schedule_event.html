@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Schedule Event{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">Schedule New Event</h2>
+    <p class="text-muted">Organize a new NSS activity or program</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="table-card p-4 animate__animated animate__fadeInUp">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-uppercase">Event Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="e.g., Blood Donation Camp" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-uppercase">Description</label>
+                    <textarea name="description" class="form-control" rows="4" placeholder="Briefly describe the event goals and requirements" required></textarea>
+                </div>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold small text-uppercase">Event Date</label>
+                        <input type="date" name="event_date" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold small text-uppercase">Event Time</label>
+                        <input type="time" name="event_time" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label fw-bold small text-uppercase">Place / Venue</label>
+                    <input type="text" name="place" class="form-control" placeholder="e.g., College Auditorium" required>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-calendar-check me-2"></i> Schedule Event
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

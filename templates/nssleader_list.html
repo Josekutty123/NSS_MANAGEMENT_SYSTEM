@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}NSS Leaders{% endblock %}
+
+{% block content %}
+<div class="mb-4 d-flex justify-content-between align-items-center animate__animated animate__fadeIn">
+    <div>
+        <h2 class="fw-bold">NSS Leaders</h2>
+        <p class="text-muted">Management personnel for NSS units</p>
+    </div>
+    <a href="{% url 'volunteer_list' %}" class="btn btn-primary shadow-sm">
+        <i class="fas fa-plus me-1"></i> Promote from Volunteers
+    </a>
+</div>
+
+<div class="table-card animate__animated animate__fadeInUp">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">Reg. No</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leader in leaders %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">{{ leader.regno }}</td>
+                    <td>{{ leader.name }}</td>
+                    <td><span class="badge bg-light text-dark border">{{ leader.department }}</span></td>
+                    <td>{{ leader.email }}</td>
+                    <td>{{ leader.phone }}</td>
+                    <td class="text-center">
+                        <span class="badge bg-success px-3 rounded-pill">Active</span>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center py-5 text-muted">
+                        <i class="fas fa-user-slash fa-3x mb-3 d-block opacity-25"></i>
+                        No NSS Leaders assigned yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

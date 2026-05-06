@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Notification - Admin{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">Send System Notification</h2>
+    <p class="text-muted">Broadcast a message to specific roles or everyone</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="table-card p-4 animate__animated animate__fadeInUp">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-uppercase">Target Audience</label>
+                    <select name="target_role" class="form-select shadow-sm" required>
+                        <option value="all">All Users</option>
+                        <option value="volunteer">Volunteers Only</option>
+                        <option value="nssleader">NSS Leaders Only</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-uppercase">Notification Title</label>
+                    <input type="text" name="title" class="form-control shadow-sm" placeholder="e.g., Annual General Meeting" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label fw-bold small text-uppercase">Message Content</label>
+                    <textarea name="message" class="form-control shadow-sm" rows="5" placeholder="Enter your system-wide announcement here..." required></textarea>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-bullhorn me-2"></i> Broadcast Notification
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

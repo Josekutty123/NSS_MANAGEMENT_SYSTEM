@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Volunteer Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-4 animate__animated animate__fadeIn">
+    <h2 class="fw-bold">Welcome, {{ user.name }}</h2>
+    <p class="text-muted">NSS Volunteer Portal - Amal Jyothi College</p>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="stats-card text-center animate__animated animate__fadeInUp">
+            <div class="stats-icon bg-primary text-white mx-auto">
+                <i class="fas fa-id-card"></i>
+            </div>
+            <h5 class="text-muted small text-uppercase fw-bold mb-1">Registration ID</h5>
+            <h2 class="fw-bold">{{ user.regno }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stats-card text-center animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+            <div class="stats-icon bg-success text-white mx-auto">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <h5 class="text-muted small text-uppercase fw-bold mb-1">Joining Date</h5>
+            <h2 class="fw-bold">{{ user.join_date }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stats-card text-center animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+            <div class="stats-icon {% if user.status == 'approved' %}bg-info{% else %}bg-warning{% endif %} text-white mx-auto">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h5 class="text-muted small text-uppercase fw-bold mb-1">Account Status</h5>
+            <div>
+                {% if user.status == 'approved' %}
+                    <span class="badge bg-success p-2 px-3 rounded-pill"><i class="fas fa-check-circle me-1"></i>Approved</span>
+                {% else %}
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill"><i class="fas fa-clock me-1"></i>Pending</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="table-card p-4 h-100 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0">Upcoming Events</h5>
+                <a href="{% url 'volunteer_events' %}" class="btn btn-sm btn-outline-primary rounded-pill">View All</a>
+            </div>
+            {% for event in upcoming_events %}
+            <div class="d-flex align-items-center p-3 mb-3 border rounded shadow-sm hover-elevate">
+                <div class="bg-light text-primary p-3 rounded text-center me-3" style="min-width: 60px;">
+                    <div class="small fw-bold">{{ event.event_date|date:"d" }}</div>
+                    <div class="small text-uppercase">{{ event.event_date|date:"M" }}</div>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-0">{{ event.title }}</h6>
+                    <p class="text-muted small mb-0"><i class="fas fa-map-marker-alt me-1"></i> {{ event.place }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted text-center py-4">No upcoming events scheduled.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="table-card p-4 h-100 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0">Recent Notifications</h5>
+                <a href="{% url 'volunteer_notifications' %}" class="btn btn-sm btn-outline-primary rounded-pill">View All</a>
+            </div>
+            {% for notif in notifications %}
+            <div class="p-3 mb-3 border-start border-4 {% if notif.sender_role == 'admin' %}border-danger{% else %}border-primary{% endif %} bg-light rounded shadow-sm">
+                <div class="d-flex justify-content-between">
+                    <h6 class="fw-bold mb-1">{{ notif.title }}</h6>
+                    <span class="text-muted small">{{ notif.created_at|date:"d M" }}</span>
+                </div>
+                <p class="text-muted small mb-0 text-truncate">{{ notif.message }}</p>
+            </div>
+            {% empty %}
+            <p class="text-muted text-center py-4">No new notifications.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
