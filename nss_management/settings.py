@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 import dj_database_url
+import certifi
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -87,11 +88,11 @@ DATABASES = {
     )
 }
 
-# Add SSL requirement for TiDB Cloud if in production
-if not DEBUG and 'tidbcloud' in DATABASES['default'].get('HOST', ''):
+# Add SSL requirement for TiDB Cloud
+if 'tidbcloud' in DATABASES['default'].get('HOST', ''):
     DATABASES['default']['OPTIONS'] = {
         'ssl': {
-            'ca': '/etc/ssl/certs/ca-certificates.crt', # Standard path on Render/Linux
+            'ca': certifi.where(),
         }
     }
 
